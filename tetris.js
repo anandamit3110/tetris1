@@ -46,50 +46,64 @@ function createMatrix(w, h) {
     return matrix;
 }
 
+function assignRandomColors(matrix) {
+    // Assign a random color index (1-4) to every non-zero cell
+    for (let y = 0; y < matrix.length; ++y) {
+        for (let x = 0; x < matrix[y].length; ++x) {
+            if (matrix[y][x] !== 0) {
+                matrix[y][x] = Math.floor(Math.random() * 4) + 1;
+            }
+        }
+    }
+    return matrix;
+}
+
 function createPiece(type) {
+    let piece;
     if (type === 'T') {
-        return [
+        piece = [
             [0, 0, 0],
             [1, 1, 1],
             [0, 1, 0],
         ];
     } else if (type === 'O') {
-        return [
+        piece = [
             [2, 2],
             [2, 2],
         ];
     } else if (type === 'L') {
-        return [
+        piece = [
             [0, 3, 0],
             [0, 3, 0],
             [0, 3, 3],
         ];
     } else if (type === 'J') {
-        return [
+        piece = [
             [0, 4, 0],
             [0, 4, 0],
             [4, 4, 0],
         ];
     } else if (type === 'I') {
-        return [
+        piece = [
             [0, 5, 0, 0],
             [0, 5, 0, 0],
             [0, 5, 0, 0],
             [0, 5, 0, 0],
         ];
     } else if (type === 'S') {
-        return [
+        piece = [
             [0, 6, 6],
             [6, 6, 0],
             [0, 0, 0],
         ];
     } else if (type === 'Z') {
-        return [
+        piece = [
             [7, 7, 0],
             [0, 7, 7],
             [0, 0, 0],
         ];
     }
+    return assignRandomColors(piece);
 }
 
 function drawMatrix(matrix, offset) {
@@ -202,13 +216,10 @@ function updateScore() {
 
 const colors = [
     null,
-    '#FF0D72', // T
-    '#0DC2FF', // O
-    '#0DFF72', // L
-    '#F538FF', // J
-    '#FF8E0D', // I
-    '#FFE138', // S
-    '#3877FF', // Z
+    '#39ff14', // green
+    '#ff0080', // pink
+    '#ffe138', // yellow
+    '#3877ff', // blue
 ];
 
 const arena = createMatrix(COLS, ROWS);
